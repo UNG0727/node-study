@@ -2,6 +2,7 @@ const express = require('express');
 const helmet = require("helmet");
 const app = express();
 const ejs = require("ejs");
+const db = require('./model/db');
 
 app.set('view engine', 'ejs');      //템플릿엔진을 ejs로 사용
 app.set('views', './views');         // views 폴더에 위치
@@ -17,5 +18,7 @@ app.use('/', mainRouter);
 
 
 app.listen(3000, function(req, res){
+
+    db.sequelize.sync({force:false})                //서버와 DB 연결
     console.log("server running port:3000")
 })

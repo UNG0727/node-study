@@ -2,7 +2,7 @@
   "name": "node-study",
   "version": "1.0.0",
   "description": "class101 웹개발",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -12,6 +12,9 @@
     "ejs": "^3.1.6",
     "express": "^4.17.1",
     "helmet": "^4.6.0",
+    "mysql2": "^2.3.3",
+    "nodemon": "^2.0.15",
+    "sequelize": "5.22",
     "supervisor": "^0.12.0"
   }
 }
