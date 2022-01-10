@@ -1,6 +1,27 @@
 const express = require('express');
 const router = express.Router();
 const db = require('../model/db');
+const url = "https://finance.naver.com/sise/sise_market_sum.naver"
+
+const cheerio = require("cheerio");                  //html을 원하는 코드로 변환해서 가져오기
+const axios = require("axios");                      //외부에 요청을 할때 필요
+const iconv = require("iconv-lite");                //인코딩
+
+router.get("/crawling", function (req,res) {
+    
+    axios({url:url, method:"GET",responseType:"arraybuffer"}).then(function(html){
+        const content = iconv.decode(html.data,"EUC-KR").toString()                     //한글깨짐 방지타입
+        const $ = cheerio.load(content)                                                 //제이쿼리좀 사용하기 위한 인자
+        
+        const table = $(".type_2 tr td")
+        table.each(function(i, tag){
+            console.log($(tag).text().trim())
+        })
+
+        res.send({success:200})
+    })                         
+
+})
 
 
 router.get("/", function(req,res){
@@ -22,6 +43,14 @@ router.post("/review/create", function(req,res){
         })
     }
     
+})
+
+router.get("/review/read", function(req, res){          //getApi는 query에 들어있다.
+    let movie_id = req.query.movie_id;
+
+    db.reviews.findAll({where:{movie_id:movie_id}}).then(function (result) {                //{데이터베이스의 칼럼 : 프론트에서 넘어온 인자}
+        res.send({success:200, data:result})
+    })  
 })
 
 /*
