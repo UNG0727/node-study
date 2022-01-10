@@ -17,6 +17,7 @@ sequelize = new Sequelize("class101","root","qwer1234",{                //DB 이
 var db = {};
 db.users = sequelize.import(__dirname + "/users.js");    // 상대주소 , 시퀄라이즈 DB 연결
 db.test = sequelize.import(__dirname + "/test.js");
+db.reviews = sequelize.import(__dirname +"/reviews.js");
 
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;

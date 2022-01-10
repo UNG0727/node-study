@@ -8,7 +8,7 @@ app.set('view engine', 'ejs');      //템플릿엔진을 ejs로 사용
 app.set('views', './views');         // views 폴더에 위치
 app.use('/public', express.static(__dirname + '/public'));   //html이나 css, 이미지 파일은 여기에 있다
 
-app.use(helmet());
+//app.use(helmet());                     //보안정책
 app.use(express.json());               //post방식의 api 사용가능
 app.use(express.urlencoded());         //post방식의 api 사용가능
 
