@@ -7,6 +7,16 @@ const cheerio = require("cheerio");                  //html을 원하는 코드�
 const axios = require("axios");                      //외부에 요청을 할때 필요
 const iconv = require("iconv-lite");                //인코딩
 
+router.get("/excel/down", function(req,res){
+    let excel_data = [{"A":1, "B":2, "C":3, "D":4}]
+    res.xls('data.xlsx', excel_data);
+})
+
+
+router.get("/excel", function(req,res){
+    res.render("excel");
+})
+
 router.get("/crawling", function (req,res) {
     
     axios({url:url, method:"GET",responseType:"arraybuffer"}).then(function(html){

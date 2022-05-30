@@ -1,8 +1,8 @@
 var Sequelize = require('sequelize');
 var sequelize;
 
-sequelize = new Sequelize("class101","root","qwer1234",{                //DB 이름, ID, 비밀번호
-    host:"localhost",
+sequelize = new Sequelize("class101","class101","qwer1234",{                //DB 이름, ID, 비밀번호
+    host:"class101.ch5wgwakdv6z.ap-northeast-2.rds.amazonaws.com",
     port:3306,
     dialect:"mysql",
     timezone: "+09:00",

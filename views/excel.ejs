@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <P>
+        엑셀 업로드: <input type="file" id="excelFile" onchange="excelExport(event)"/>
+    </P>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.16.9/xlsx.full.min.js">
+            //엑셀파일을 JSON으로 변환  
+    </script>             
+
+    <script>
+        function excelExport(event){
+            var input = event.target;
+            var reader = new FileReader();              //파일 리더 
+            reader.onload = function(){
+                var fileData = reader.result;
+                var wb = XLSX.read(fileData, {type:'binary'})           //원초적인 데이터로 변환해줌
+                wb.SheetNames.forEach(function(sheetName){
+                    var rowObj = XLSX.utils.sheet_to_json(wb.Sheets[sheetName])
+                    console.log(rowObj);
+                })
+            }
+            reader.readAsBinaryString(input.files[0]);
+        }
+    </script>
+
+</body>
+</html>
